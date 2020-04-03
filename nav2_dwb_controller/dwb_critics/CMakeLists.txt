@@ -21,6 +21,10 @@ include_directories(
   include
 )
 
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
 add_library(${PROJECT_NAME} SHARED
     src/alignment_util.cpp
     src/map_grid.cpp

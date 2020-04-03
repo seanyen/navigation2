@@ -27,11 +27,15 @@ include_directories(
   include
 )
 
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
 add_library(simple_goal_checker SHARED src/simple_goal_checker.cpp)
 ament_target_dependencies(simple_goal_checker ${dependencies})
 # prevent pluginlib from using boost
 target_compile_definitions(simple_goal_checker PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
-
+target_compile_definitions(simple_goal_checker PRIVATE "DWB_PLUGINS_SIMPLE_GOAL_CHECKER_BUILDING_DLL")
 
 add_library(stopped_goal_checker SHARED src/stopped_goal_checker.cpp)
 target_link_libraries(stopped_goal_checker simple_goal_checker)

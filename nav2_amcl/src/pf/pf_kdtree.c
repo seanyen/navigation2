@@ -25,6 +25,8 @@
  * CVS: $Id: pf_kdtree.c 7057 2008-10-02 00:44:06Z gbiggs $
  *************************************************************************/
 
+#define _USE_MATH_DEFINES
+
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>

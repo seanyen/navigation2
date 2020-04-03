@@ -10,6 +10,8 @@ add_library(${library_name} SHARED
   parameter_events_subscriber.cpp
 )
 
+target_compile_definitions(${library_name} PRIVATE "NAV2_UTIL_BUILDING_DLL")
+
 ament_target_dependencies(${library_name}
   rclcpp
   nav2_msgs

@@ -31,11 +31,14 @@
 #include <string.h>
 // #include <gsl/gsl_rng.h>
 // #include <gsl/gsl_randist.h>
+#include <random>
 
 #include "nav2_amcl/pf/pf_pdf.hpp"
 
 // Random number generator seed value
 static unsigned int pf_pdf_seed;
+static std::mt19937 gen;
+static std::uniform_real_distribution<> dist(0.0, 1.0);
 
 
 /**************************************************************************
@@ -48,7 +51,7 @@ pf_pdf_gaussian_t * pf_pdf_gaussian_alloc(pf_vector_t x, pf_matrix_t cx)
   pf_matrix_t cd;
   pf_pdf_gaussian_t * pdf;
 
-  pdf = calloc(1, sizeof(pf_pdf_gaussian_t));
+  pdf = (pf_pdf_gaussian_t *)calloc(1, sizeof(pf_pdf_gaussian_t));
 
   pdf->x = x;
   pdf->cx = cx;
@@ -64,7 +67,7 @@ pf_pdf_gaussian_t * pf_pdf_gaussian_alloc(pf_vector_t x, pf_matrix_t cx)
   // Initialize the random number generator
   // pdf->rng = gsl_rng_alloc(gsl_rng_taus);
   // gsl_rng_set(pdf->rng, ++pf_pdf_seed);
-  srand48(++pf_pdf_seed);
+  gen = std::mt19937(++pf_pdf_seed);
 
   return pdf;
 }
@@ -133,11 +136,11 @@ double pf_ran_gaussian(double sigma)
 
   do {
     do {
-      r = drand48();
+      r = dist(gen);
     } while (r == 0.0);
     x1 = 2.0 * r - 1.0;
     do {
-      r = drand48();
+      r = dist(gen);
     } while (r == 0.0);
     x2 = 2.0 * r - 1.0;
     w = x1 * x1 + x2 * x2;

@@ -27,6 +27,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <random>
 
 #include "message_filters/subscriber.h"
 #include "nav2_amcl/angleutils.hpp"
@@ -47,6 +48,9 @@
 #pragma GCC diagnostic ignored "-Wpedantic"
 #include "tf2/utils.h"
 #pragma GCC diagnostic pop
+
+static std::mt19937 gen;
+static std::uniform_real_distribution<> dist(0.0, 1.0);
 
 using namespace std::placeholders;
 using namespace std::chrono_literals;
@@ -431,12 +435,12 @@ AmclNode::uniformPoseGenerator(void * arg)
   map_t * map = reinterpret_cast<map_t *>(arg);
 
 #if NEW_UNIFORM_SAMPLING
-  unsigned int rand_index = drand48() * free_space_indices.size();
+  unsigned int rand_index = dist(gen) * free_space_indices.size();
   std::pair<int, int> free_point = free_space_indices[rand_index];
   pf_vector_t p;
   p.v[0] = MAP_WXGX(map, free_point.first);
   p.v[1] = MAP_WYGY(map, free_point.second);
-  p.v[2] = drand48() * 2 * M_PI - M_PI;
+  p.v[2] = dist(gen) * 2 * M_PI - M_PI;
 #else
   double min_x, max_x, min_y, max_y;
 
@@ -449,9 +453,9 @@ AmclNode::uniformPoseGenerator(void * arg)
 
   RCLCPP_DEBUG(get_logger(), "Generating new uniform sample");
   for (;; ) {
-    p.v[0] = min_x + drand48() * (max_x - min_x);
-    p.v[1] = min_y + drand48() * (max_y - min_y);
-    p.v[2] = drand48() * 2 * M_PI - M_PI;
+    p.v[0] = min_x + dist(gen) * (max_x - min_x);
+    p.v[1] = min_y + dist(gen) * (max_y - min_y);
+    p.v[2] = dist(gen) * 2 * M_PI - M_PI;
     // Check that it's a free cell
     int i, j;
     i = MAP_GXWX(map, p.v[0]);

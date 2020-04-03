@@ -10,6 +10,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 endif()
 
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
 # Qt5 boilerplate options from http://doc.qt.io/qt-5/cmake-manual.html
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -80,12 +84,10 @@ target_include_directories(${library_name} PUBLIC
 
 target_link_libraries(${library_name}
   rviz_common::rviz_common
+  rviz_default_plugins::rviz_default_plugins
 )
 
-# Causes the visibility macros to use dllexport rather than dllimport,
-# which is appropriate when building the dll but not consuming it.
-# TODO: Make this specific to this project (not rviz default plugins)
-target_compile_definitions(${library_name} PRIVATE "RVIZ_DEFAULT_PLUGINS_BUILDING_LIBRARY")
+target_compile_definitions(${library_name} PRIVATE "NAV2_RVIZ_PLUGINS_BUILDING_DLL")
 
 # prevent pluginlib from using boost
 target_compile_definitions(${library_name} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
@@ -112,7 +114,7 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_include_directories(include)
-ament_export_interfaces(${library_name} HAS_LIBRARY_TARGET)
+#ament_export_interfaces(${library_name} HAS_LIBRARY_TARGET)
 ament_export_dependencies(
   Qt5
   rviz_common

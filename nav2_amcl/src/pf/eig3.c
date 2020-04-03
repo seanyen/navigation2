@@ -8,7 +8,11 @@
 #endif
 
 // #define n 3
+#ifndef _MSC_VER
 static const int n = 3;
+#else
+#define n (3)
+#endif
 
 static double hypot2(double x, double y)
 {

@@ -24,6 +24,10 @@ include_directories(
   include
 )
 
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
 set(executable_name planner_server)
 set(library_name ${executable_name}_core)
 
@@ -53,6 +57,7 @@ ament_target_dependencies(${library_name}
 )
 
 target_compile_definitions(${library_name} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
+target_compile_definitions(${library_name} PRIVATE "NAV2_PLANNER_BUILDING_DLL")
 
 add_executable(${executable_name}
   src/main.cpp

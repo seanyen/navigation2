@@ -24,6 +24,10 @@ include_directories(
   include
 )
 
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
 set(dependencies
   rclcpp
   std_msgs
@@ -46,6 +50,7 @@ add_library(dwb_core SHARED
   src/publisher.cpp
   src/illegal_trajectory_tracker.cpp
 )
+target_compile_definitions(dwb_core PRIVATE "DWB_CORE_BUILDING_DLL")
 
 # prevent pluginlib from using boost
 target_compile_definitions(dwb_core PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")

@@ -27,6 +27,8 @@ add_library(${library_name} SHARED
   src/lifecycle_manager_client.cpp
 )
 
+target_compile_definitions(${library_name} PRIVATE "NAV2_LIFECYCLE_MANAGER_BUILDING_DLL")
+
 set(dependencies
   geometry_msgs
   lifecycle_msgs

@@ -37,6 +37,7 @@ set(library_name ${executable_name}_core)
 add_library(${library_name} SHARED
   src/amcl_node.cpp
 )
+target_compile_definitions(${library_name} PRIVATE "NAV2_AMCL_BUILDING_DLL")
 
 set(dependencies
   rclcpp

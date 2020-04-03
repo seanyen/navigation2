@@ -3,13 +3,15 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 add_library(pf_lib SHARED
-  pf.c
+  pf.cpp
   pf_kdtree.c
-  pf_pdf.c
+  pf_pdf.cpp
   pf_vector.c
   eig3.c
   pf_draw.c
 )
+
+target_compile_definitions(pf_lib PRIVATE "NAV2_AMCL_PF_BUILDING_DLL")
 
 install(TARGETS
   pf_lib

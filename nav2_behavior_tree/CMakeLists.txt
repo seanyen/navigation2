@@ -45,6 +45,7 @@ set(dependencies
 add_library(${library_name} SHARED
   src/behavior_tree_engine.cpp
 )
+target_compile_definitions(${library_name} PRIVATE "NAV2_BEHAVIOR_TREE_BUILDING_DLL")
 
 ament_target_dependencies(${library_name}
   ${dependencies}

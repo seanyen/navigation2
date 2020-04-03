@@ -3,7 +3,8 @@ add_library(motions_lib SHARED
   differential_motion_model.cpp
   motion_model.cpp
 )
-target_link_libraries(motions_lib pf_lib)
+target_compile_definitions(motions_lib PRIVATE "NAV2_AMCL_MOTION_MODEL_BUILDING_DLL")
+target_link_libraries(motions_lib pf_lib map_lib)
 ament_target_dependencies(motions_lib
   nav2_util
 )

@@ -35,7 +35,7 @@
 * Author: Eitan Marder-Eppstein
 *********************************************************************/
 #include <nav2_voxel_grid/voxel_grid.hpp>
-#include <sys/time.h>
+//#include <sys/time.h>
 
 namespace nav2_voxel_grid
 {

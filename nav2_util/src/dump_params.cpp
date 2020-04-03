@@ -407,7 +407,7 @@ int main(int argc, char * argv[])
     po::notify(vm);
 
     if (vm.count("help")) {
-      std::cout << "Usage: " << basename(argv[0]) << "\n";
+      std::cout << "Usage: " << argv[0] << "\n";
       std::cout << desc << "\n";
       return 1;
     }

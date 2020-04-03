@@ -34,6 +34,7 @@ add_library(${library_name} SHARED
   src/bt_navigator.cpp
   src/ros_topic_logger.cpp
 )
+target_compile_definitions(${library_name} PRIVATE "NAV2_BT_NAVIGATOR_BUILDING_DLL")
 
 set(dependencies
   rclcpp

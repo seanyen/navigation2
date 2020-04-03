@@ -36,7 +36,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 // We use SDL_image to load the image from disk
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include <string>
 #include <stdexcept>
 #include "tf2/LinearMath/Quaternion.h"

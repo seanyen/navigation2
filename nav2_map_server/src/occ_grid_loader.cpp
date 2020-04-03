@@ -31,7 +31,6 @@
 
 #include "nav2_map_server/occ_grid_loader.hpp"
 
-#include <libgen.h>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -87,7 +86,8 @@ OccGridLoader::LoadParameters OccGridLoader::load_map_yaml(const std::string & y
     // dirname takes a mutable char *, so we copy into a vector
     std::vector<char> fname_copy(yaml_filename.begin(), yaml_filename.end());
     fname_copy.push_back('\0');
-    image_file_name = std::string(dirname(fname_copy.data())) + '/' + image_file_name;
+    // TODO:
+    //image_file_name = std::string(dirname(fname_copy.data())) + '/' + image_file_name;
   }
   loadParameters.image_file_name = image_file_name;
 

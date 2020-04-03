@@ -24,6 +24,10 @@ include_directories(
   include
 )
 
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
 set(library_name recoveries_server_core)
 set(executable_name recoveries_server)
 

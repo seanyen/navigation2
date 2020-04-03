@@ -29,6 +29,8 @@ add_library(${library_name} SHARED
   src/waypoint_follower.cpp
 )
 
+target_compile_definitions(${library_name} PRIVATE "NAV2_WAYPOINT_FOLLOWER_BUILDING_DLL")
+
 set(dependencies
   rclcpp
   rclcpp_action

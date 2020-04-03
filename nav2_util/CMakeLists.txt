@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(nav2_util)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
+
 find_package(ament_cmake REQUIRED)
 find_package(nav2_common REQUIRED)
 find_package(nav2_msgs REQUIRED)
@@ -8,8 +10,8 @@ find_package(tf2_ros REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(SDL REQUIRED)
-find_package(SDL_image REQUIRED)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(lifecycle_msgs REQUIRED)
@@ -24,8 +26,6 @@ set(dependencies
     tf2
     tf2_geometry_msgs
     geometry_msgs
-    SDL
-    SDL_image
     nav_msgs
     rclcpp
     lifecycle_msgs

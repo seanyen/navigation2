@@ -19,6 +19,10 @@ include_directories(
   include
 )
 
+if(MSVC)
+  add_compile_definitions(_USE_MATH_DEFINES)
+endif()
+
 set(executable_name controller_server)
 
 add_executable(${executable_name}

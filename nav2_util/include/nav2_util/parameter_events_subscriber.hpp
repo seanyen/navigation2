@@ -23,6 +23,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/parameter_events_filter.hpp"
+#include "nav2_util/visibility_control.h"
 
 namespace nav2_util
 {
@@ -38,7 +39,7 @@ struct ParameterEventsCallbackHandle
   ParameterEventsCallbackType callback;
 };
 
-class ParameterEventsSubscriber
+class NAV2_UTIL_PUBLIC ParameterEventsSubscriber
 {
 public:
   ParameterEventsSubscriber(

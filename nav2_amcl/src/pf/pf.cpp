@@ -30,11 +30,14 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include <random>
 
 #include "nav2_amcl/pf/pf.hpp"
 #include "nav2_amcl/pf/pf_pdf.hpp"
 #include "nav2_amcl/pf/pf_kdtree.hpp"
 
+static std::mt19937 gen;
+static std::uniform_real_distribution<> dist(0.0, 1.0);
 
 // Compute the required number of samples, given that there are k bins
 // with samples in them.
@@ -52,9 +55,9 @@ pf_t * pf_alloc(
   pf_sample_set_t * set;
   pf_sample_t * sample;
 
-  srand48(time(NULL));
+  gen = std::mt19937(time(NULL));
 
-  pf = calloc(1, sizeof(pf_t));
+  pf = (pf_t *)calloc(1, sizeof(pf_t));
 
   pf->random_pose_fn = random_pose_fn;
   pf->random_pose_data = random_pose_data;
@@ -76,7 +79,7 @@ pf_t * pf_alloc(
     set = pf->sets + j;
 
     set->sample_count = max_samples;
-    set->samples = calloc(max_samples, sizeof(pf_sample_t));
+    set->samples = (pf_sample_t *)calloc(max_samples, sizeof(pf_sample_t));
 
     for (i = 0; i < set->sample_count; i++) {
       sample = set->samples + i;
@@ -91,7 +94,7 @@ pf_t * pf_alloc(
 
     set->cluster_count = 0;
     set->cluster_max_count = max_samples;
-    set->clusters = calloc(set->cluster_max_count, sizeof(pf_cluster_t));
+    set->clusters = (pf_cluster_t *)calloc(set->cluster_max_count, sizeof(pf_cluster_t));
 
     set->mean = pf_vector_zero();
     set->cov = pf_matrix_zero();
@@ -333,7 +336,7 @@ void pf_update_resample(pf_t * pf)
   /*
   // Low-variance resampler, taken from Probabilistic Robotics, p110
   count_inv = 1.0/set_a->sample_count;
-  r = drand48() * count_inv;
+  r = dist(gen) * count_inv;
   c = set_a->samples[0].weight;
   i = 0;
   m = 0;
@@ -341,7 +344,7 @@ void pf_update_resample(pf_t * pf)
   while (set_b->sample_count < pf->max_samples) {
     sample_b = set_b->samples + set_b->sample_count++;
 
-    if (drand48() < w_diff) {
+    if (dist(gen) < w_diff) {
       sample_b->pose = (pf->random_pose_fn)(pf->random_pose_data);
     } else {
       // Can't (easily) combine low-variance sampler with KLD adaptive
@@ -356,7 +359,7 @@ void pf_update_resample(pf_t * pf)
         // number
         if(i >= set_a->sample_count)
         {
-          r = drand48() * count_inv;
+          r = dist(gen) * count_inv;
           c = set_a->samples[0].weight;
           i = 0;
           m = 0;
@@ -370,7 +373,7 @@ void pf_update_resample(pf_t * pf)
 
       // Naive discrete event sampler
       double r;
-      r = drand48();
+      r = dist(gen);
       for (i = 0; i < set_a->sample_count; i++) {
         if ((c[i] <= r) && (r < c[i + 1])) {
           break;

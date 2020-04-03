@@ -22,6 +22,10 @@
 #ifndef NAV2_AMCL__ANGLEUTILS_HPP_
 #define NAV2_AMCL__ANGLEUTILS_HPP_
 
+#ifndef _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
+#endif
+
 #include <math.h>
 
 namespace nav2_amcl

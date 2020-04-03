@@ -32,6 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
+#define _USE_MATH_DEFINES
+
 #include "nav_2d_utils/conversions.hpp"
 #include <vector>
 #include <string>

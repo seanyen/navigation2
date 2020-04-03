@@ -38,8 +38,8 @@ void RosTopicLogger::callback(
 
   // BT timestamps are a duration since the epoch. Need to convert to a time_point
   // before converting to a msg.
-  event.timestamp =
-    tf2_ros::toMsg(std::chrono::time_point<std::chrono::high_resolution_clock>(timestamp));
+  //event.timestamp =
+  //  tf2_ros::toMsg(std::chrono::time_point<std::chrono::high_resolution_clock>(timestamp));
   event.node_name = node.name();
   event.previous_status = toStr(prev_status, false);
   event.current_status = toStr(status, false);

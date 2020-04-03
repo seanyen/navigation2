@@ -40,6 +40,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "nav2_core/goal_checker.hpp"
+#include "dwb_plugins/simple_goal_checker_visibility_control.h"
 
 namespace dwb_plugins
 {
@@ -48,7 +49,7 @@ namespace dwb_plugins
  * @class SimpleGoalChecker
  * @brief Goal Checker plugin that only checks the position difference
  */
-class SimpleGoalChecker : public nav2_core::GoalChecker
+class DWB_PLUGINS_SIMPLE_GOAL_CHECKER_PUBLIC SimpleGoalChecker : public nav2_core::GoalChecker
 {
 public:
   SimpleGoalChecker();
