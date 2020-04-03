@@ -22,7 +22,8 @@ jobs:
       run: |
         rm -rf /c/hostedtoolcache/windows/Boost/1.72.0/lib/cmake/Boost-1.72.0
     - uses: actions/checkout@v2
-      path: src/navigation2
+      with:
+        path: src/navigation2
     - uses: goanpeca/setup-miniconda@v1
       with:
         activate-environment: myenv
