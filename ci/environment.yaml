@@ -7,9 +7,9 @@ dependencies:
   - colcon-common-extensions
   - rosinstall_generator
   - vcstool
-  # - asio
-  # - tinyxml2
-  # - tinyxml
-  # - openssl
-  # - eigen
-  # - log4cxx
+  - asio
+  - tinyxml2
+  - tinyxml
+  - openssl
+  - eigen
+  - log4cxx
