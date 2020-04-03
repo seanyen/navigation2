@@ -34,4 +34,5 @@ jobs:
         rosinstall_generator navigation2 --rosdistro eloquent ^
         --deps-only --deps --upstream-development > deps.rosinstall
         vcs import src/ < deps.rosinstall
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
         colcon build
