@@ -5,6 +5,7 @@ channels:
 dependencies:
   - python=3.7
   - colcon-common-extensions
+  - rosinstall_generator
   - asio
   - tinyxml2
   - tinyxml
