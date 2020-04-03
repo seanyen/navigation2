@@ -1,0 +1,13 @@
+name: myenv
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - colcon-common-extensions
+  - asio
+  - tinyxml2
+  - tinyxml
+  - openssl
+  - eigen
+  - log4cxx
