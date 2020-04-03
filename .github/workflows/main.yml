@@ -32,7 +32,7 @@ jobs:
         rosinstall_generator navigation2 --rosdistro eloquent ^
         --deps-only --deps --upstream-development > c:\temp\deps.rosinstall
         type c:\temp\deps.rosinstall
-    - uses: ros-tooling/action-ros-ci@master
+    - uses: ros-tooling/action-ros-ci@0.0.14
       with:
         package-name: navigation2
         vcs-repo-file-url: c:/temp/deps.rosinstall
