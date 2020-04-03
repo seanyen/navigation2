@@ -30,9 +30,9 @@ jobs:
     - shell: cmd /C CALL {0}
       run: |
         rosinstall_generator navigation2 --rosdistro eloquent ^
-        --deps-only --deps --upstream-development > ci\deps.rosinstall
-        type ci\deps.rosinstall
+        --deps-only --deps --upstream-development > c:\temp\deps.rosinstall
+        type c:\temp\deps.rosinstall
     - uses: ros-tooling/action-ros-ci@master
       with:
         package-name: navigation2
-        vcs-repo-file-url: ${{ github.workspace }}/ci/deps.rosinstall
+        vcs-repo-file-url: c:/temp/deps.rosinstall
